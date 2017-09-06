@@ -1,4 +1,4 @@
-# Age Grade
+# Common classes
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/runalyze/common.svg)](https://packagist.org/packages/runalyze/common)
 [![Build Status](https://travis-ci.org/Runalyze/common.svg?branch=master)](https://travis-ci.org/Runalyze/common)
