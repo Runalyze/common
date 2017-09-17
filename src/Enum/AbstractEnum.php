@@ -1,13 +1,18 @@
 <?php
-/**
- * This file contains class::AbstractEnum
- * @package Runalyze\Common\Enum
+
+/*
+ * This file is part of the Runalyze Age Grade.
+ *
+ * (c) RUNALYZE <mail@runalyze.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Runalyze\Common\Enum;
 
 /**
- * Abstract class for enums
+ * Abstract class for enums.
  *
  * Usage:
  * <code>
@@ -26,69 +31,64 @@ namespace Runalyze\Common\Enum;
  * </code>
  *
  * @see http://stackoverflow.com/a/254543/3449264
- *
- * @author Hannes Christiansen
- * @package Runalyze\Common\Enum
  */
 abstract class AbstractEnum
 {
-	/**
-	 * @var array
-	 */
-	private static $ConstantsCache = [];
+    /** @var array */
+    private static $ConstantsCache = [];
 
-	/**
-	 * Get all constants of called class
-	 *
-	 * This static methods uses an internal cache to not create a reflection on every call.
-	 *
-	 * @return array a hash with your constants and their value
-	 */
-	public static function getEnum()
-	{
-		$enumClass = get_called_class();
+    /**
+     * Get all constants of called class.
+     *
+     * This static methods uses an internal cache to not create a reflection on every call.
+     *
+     * @return array a hash with your constants and their value
+     */
+    public static function getEnum()
+    {
+        $enumClass = get_called_class();
 
-		if (!isset(self::$ConstantsCache[$enumClass])) {
-			$reflect = new \ReflectionClass($enumClass);
-			self::$ConstantsCache[$enumClass] = $reflect->getConstants();
-		}
+        if (!isset(self::$ConstantsCache[$enumClass])) {
+            $reflect = new \ReflectionClass($enumClass);
+            self::$ConstantsCache[$enumClass] = $reflect->getConstants();
+        }
 
-		return self::$ConstantsCache[$enumClass];
-	}
+        return self::$ConstantsCache[$enumClass];
+    }
 
-	/**
-	 * Checks whether a constant is valid
-	 *
-	 * @param string $name name of the constant
-	 * @param bool $strict whether to make a case sensitive check
-	 *
-	 * @return bool the result of the test
-	 */
-	public static function isValidName($name, $strict = false)
-	{
-		$constants = self::getEnum();
+    /**
+     * Checks whether a constant is valid.
+     *
+     * @param string $name   name of the constant
+     * @param bool   $strict whether to make a case sensitive check
+     *
+     * @return bool the result of the test
+     */
+    public static function isValidName($name, $strict = false)
+    {
+        $constants = self::getEnum();
 
-		if ($strict) {
-			return array_key_exists($name, $constants);
-		}
+        if ($strict) {
+            return array_key_exists($name, $constants);
+        }
 
-		$keys = array_map('strtolower', array_keys($constants));
+        $keys = array_map('strtolower', array_keys($constants));
 
-		return in_array(strtolower($name), $keys);
-	}
+        return in_array(strtolower($name), $keys, true);
+    }
 
-	/**
-	 * Checks whether a value is defined
-	 *
-	 * @param int|string $value the value to test
-	 * @param bool $strict check the types of the value in the values
-	 *
-	 * @return bool the result of the test
-	 */
-	public static function isValidValue($value, $strict = true)
-	{
-		$values = array_values(self::getEnum());
+    /**
+     * Checks whether a value is defined.
+     *
+     * @param int|string $value  the value to test
+     * @param bool       $strict check the types of the value in the values
+     *
+     * @return bool the result of the test
+     */
+    public static function isValidValue($value, $strict = true)
+    {
+        $values = array_values(self::getEnum());
 
-		return in_array($value, $values, $strict);
-	}
+        return in_array($value, $values, $strict);
+    }
 }

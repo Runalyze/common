@@ -1,28 +1,27 @@
 <?php
-/**
- * This file contains trait::AbstractEnumFactoryTrait
- * @package Runalyze\Common\Enum
+
+/*
+ * This file is part of the Runalyze Age Grade.
+ *
+ * (c) RUNALYZE <mail@runalyze.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Runalyze\Common\Enum;
 
-/**
- * Trait providing a factory for an enum class
- *
- * @author Hannes Christiansen
- * @package Runalyze\Common\Enum
- */
 trait AbstractEnumFactoryTrait
 {
-	/** @var array|null */
-	private static $ClassNames = null;
+    /** @var array|null */
+    private static $ClassNames = null;
 
     /** @var string */
     private static $Namespace = '';
 
     /**
-     * Get object
-     * @param int|string $enum from internal enum
+     * Get object.
+     * @param  int|string $enum from internal enum
      * @return object
      *
      * @throws \InvalidArgumentException
@@ -40,7 +39,7 @@ trait AbstractEnumFactoryTrait
 
         $className = self::$Namespace.'\\'.self::$ClassNames[$enum];
 
-        return new $className;
+        return new $className();
     }
 
     private static function generateNamespace()
@@ -57,7 +56,7 @@ trait AbstractEnumFactoryTrait
             throw new \BadMethodCallException('Classes using this trait must have static method getEnum().');
         }
 
-        self::$ClassNames = array_map(function($v) {
+        self::$ClassNames = array_map(function ($v) {
             return str_replace(' ', '', ucwords(strtolower(str_replace('_', ' ', $v))));
         }, array_flip(self::getEnum()));
     }

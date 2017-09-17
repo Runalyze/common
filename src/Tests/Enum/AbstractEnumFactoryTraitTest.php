@@ -1,17 +1,30 @@
 <?php
 
+/*
+ * This file is part of the Runalyze Age Grade.
+ *
+ * (c) RUNALYZE <mail@runalyze.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Runalyze\Common\Enum;
 
 class AbstractEnumFactoryTrait_MockTester extends AbstractEnum
 {
-	use AbstractEnumFactoryTrait;
+    use AbstractEnumFactoryTrait;
 
-	const FOO = 'foo';
-	const FOO_BAR = 'bar';
+    const FOO = 'foo';
+    const FOO_BAR = 'bar';
 }
 
-class Foo extends AbstractEnum {}
-class FooBar extends AbstractEnum {}
+class Foo extends AbstractEnum
+{
+}
+class FooBar extends AbstractEnum
+{
+}
 
 class AbstractEnumFactoryTrait_WrongMockTester
 {
@@ -22,13 +35,12 @@ class AbstractEnumFactoryTrait_WrongMockTester
 
 class AbstractEnumFactoryTraitTest extends \PHPUnit_Framework_TestCase
 {
-
-	public function testFoo()
-	{
+    public function testFoo()
+    {
         $object = AbstractEnumFactoryTrait_MockTester::get(AbstractEnumFactoryTrait_MockTester::FOO);
 
-		$this->assertTrue($object instanceof Foo);
-	}
+        $this->assertTrue($object instanceof Foo);
+    }
 
     public function testFooBar()
     {
@@ -52,5 +64,4 @@ class AbstractEnumFactoryTraitTest extends \PHPUnit_Framework_TestCase
     {
         AbstractEnumFactoryTrait_WrongMockTester::get(AbstractEnumFactoryTrait_WrongMockTester::TEST);
     }
-
 }
