@@ -15,11 +15,7 @@ cache:
 
 before_install:
   - mkdir -p build/logs
-  - sudo apt-get -qq update
-  - 'if [ $(phpenv version-name) == "5.5" ]; then sudo apt-get install -y php5.6-mongo; fi'
-  - 'if [ $(phpenv version-name) == "5.6" ]; then sudo apt-get install -y php5.6-mongo; fi'
-  - 'if [ $(phpenv version-name) == "7.0" ]; then sudo apt-get install -y php7.0-mongo; fi'
-  - 'if [ $(phpenv version-name) == "7.1" ]; then sudo apt-get install -y php7.1-mongo; fi'
+  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
   - composer install --prefer-dist --no-interaction
