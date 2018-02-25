@@ -15,7 +15,7 @@ cache:
 
 before_install:
   - mkdir -p build/logs
-  - sudo pecl install mongodb
+  - pecl install mongodb
 
 install:
   - composer install --prefer-dist --no-interaction
