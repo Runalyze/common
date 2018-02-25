@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Runalyze Age Grade.
+ * This file is part of the Runalyze Common.
  *
  * (c) RUNALYZE <mail@runalyze.com>
  *
