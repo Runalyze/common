@@ -21,7 +21,7 @@ install:
   - composer install --prefer-dist --no-interaction
 
 script:
-  - phpunit --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
   - vendor/bin/php-cs-fixer fix -v --diff --dry-run
 
 after_script:
