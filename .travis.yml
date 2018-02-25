@@ -15,7 +15,7 @@ cache:
 
 before_install:
   - mkdir -p build/logs
-  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - sudo pecl install mongodb
 
 install:
   - composer install --prefer-dist --no-interaction
