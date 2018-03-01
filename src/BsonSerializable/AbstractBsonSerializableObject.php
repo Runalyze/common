@@ -79,7 +79,9 @@ abstract class AbstractBsonSerializableObject implements BsonSerializableInterfa
 
     public function fromBinary($string)
     {
-        return \MongoDB\BSON\toPHP($string, ['root' => get_class($this)]);
+        return \MongoDB\BSON\toPHP($string, [
+            'root' => get_class($this),
+        ]);
     }
 
     /**
