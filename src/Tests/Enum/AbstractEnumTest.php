@@ -22,7 +22,7 @@ class AbstractEnum_MockTester extends AbstractEnum
     const SATURDAY = 6;
 }
 
-class AbstractEnumTest extends \PHPUnit_Framework_TestCase
+class AbstractEnumTest extends \PHPUnit\Framework\TestCase
 {
     public function testEnumeration()
     {

@@ -17,6 +17,14 @@ class AbstractEnumFactoryTrait_MockTester extends AbstractEnum
 
     const FOO = 'foo';
     const FOO_BAR = 'bar';
+
+    public static function getEnum()
+    {
+        return [
+            'FOO' => 'foo',
+            'FOO_BAR' => 'bar'
+        ];
+    }
 }
 
 class Foo extends AbstractEnum
@@ -31,9 +39,16 @@ class AbstractEnumFactoryTrait_WrongMockTester
     use AbstractEnumFactoryTrait;
 
     const TEST = 0;
+
+    public static function getEnum()
+    {
+        return [
+            'TEST' => 0
+        ];
+    }
 }
 
-class AbstractEnumFactoryTraitTest extends \PHPUnit_Framework_TestCase
+class AbstractEnumFactoryTraitTest extends \PHPUnit\Framework\TestCase
 {
     public function testFoo()
     {
@@ -49,19 +64,17 @@ class AbstractEnumFactoryTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($object instanceof FooBar);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidEnum()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         AbstractEnumFactoryTrait_MockTester::get('idontexist');
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
     public function testInvalidClass()
     {
+        $this->expectException(\Error::class);
+
         AbstractEnumFactoryTrait_WrongMockTester::get(AbstractEnumFactoryTrait_WrongMockTester::TEST);
     }
 }
