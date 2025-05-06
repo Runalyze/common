@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Runalyze Age Grade.
+ * This file is part of Runalyze Common.
  *
  * (c) RUNALYZE <mail@runalyze.com>
  *
@@ -18,7 +18,7 @@ class AbstractEnumFactoryTrait_MockTester extends AbstractEnum
     const FOO = 'foo';
     const FOO_BAR = 'bar';
 
-    public static function getEnum()
+    public static function getEnum(): array
     {
         return [
             'FOO' => 'foo',
@@ -40,7 +40,7 @@ class AbstractEnumFactoryTrait_WrongMockTester
 
     const TEST = 0;
 
-    public static function getEnum()
+    public static function getEnum(): array
     {
         return [
             'TEST' => 0

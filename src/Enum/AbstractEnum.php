@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Runalyze Age Grade.
+ * This file is part of Runalyze Common.
  *
  * (c) RUNALYZE <mail@runalyze.com>
  *
@@ -34,8 +34,7 @@ namespace Runalyze\Common\Enum;
  */
 abstract class AbstractEnum
 {
-    /** @var array */
-    private static $ConstantsCache = [];
+    private static array $ConstantsCache = [];
 
     /**
      * Get all constants of called class.
@@ -44,13 +43,24 @@ abstract class AbstractEnum
      *
      * @return array a hash with your constants and their value
      */
-    public static function getEnum()
+    public static function getEnum(): array
     {
         $enumClass = get_called_class();
 
         if (!isset(self::$ConstantsCache[$enumClass])) {
             $reflect = new \ReflectionClass($enumClass);
-            self::$ConstantsCache[$enumClass] = $reflect->getConstants();
+            $constants = $reflect->getConstants();
+            $filteredConstants = [];
+
+            foreach ($constants as $name => $value) {
+                $constReflector = $reflect->getReflectionConstant($name);
+
+                if ($constReflector && !$constReflector->getAttributes(NoEnum::class)) {
+                    $filteredConstants[$name] = $value;
+                }
+            }
+
+            self::$ConstantsCache[$enumClass] = $filteredConstants;
         }
 
         return self::$ConstantsCache[$enumClass];
@@ -64,7 +74,7 @@ abstract class AbstractEnum
      *
      * @return bool the result of the test
      */
-    public static function isValidName($name, $strict = false)
+    public static function isValidName($name, bool $strict = false): bool
     {
         $constants = self::getEnum();
 
@@ -85,7 +95,7 @@ abstract class AbstractEnum
      *
      * @return bool the result of the test
      */
-    public static function isValidValue($value, $strict = true)
+    public static function isValidValue($value, bool $strict = true): bool
     {
         $values = array_values(self::getEnum());
 

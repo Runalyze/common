@@ -1,7 +1,7 @@
 <?php
 
 $header = <<<EOF
-This file is part of the Runalyze Age Grade.
+This file is part of Runalyze Common.
 
 (c) RUNALYZE <mail@runalyze.com>
 

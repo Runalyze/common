@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Runalyze Age Grade.
+ * This file is part of Runalyze Common.
  *
  * (c) RUNALYZE <mail@runalyze.com>
  *
@@ -13,6 +13,9 @@ namespace Runalyze\Common\Enum;
 
 class AbstractEnum_MockTester extends AbstractEnum
 {
+    #[NoEnum]
+    const IGNORE_ME = [];
+
     const SUNDAY = 0;
     const MONDAY = 1;
     const TUESDAY = 2;

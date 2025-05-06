@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Runalyze Age Grade.
+ * This file is part of Runalyze Common.
  *
  * (c) RUNALYZE <mail@runalyze.com>
  *
@@ -13,11 +13,8 @@ namespace Runalyze\Common\Enum;
 
 trait AbstractEnumFactoryTrait
 {
-    /** @var array|null */
-    private static $ClassNames = null;
-
-    /** @var string */
-    private static $Namespace = '';
+    private static ?array $ClassNames = null;
+    private static string $Namespace = '';
 
     /**
      * Get object.
@@ -42,7 +39,7 @@ trait AbstractEnumFactoryTrait
         return new $className();
     }
 
-    private static function generateNamespace()
+    private static function generateNamespace(): void
     {
         self::$Namespace = substr(get_called_class(), 0, strrpos(get_called_class(), '\\'));
     }
@@ -50,7 +47,7 @@ trait AbstractEnumFactoryTrait
     /**
      * @throws \Exception
      */
-    private static function generateClassNamesArray()
+    private static function generateClassNamesArray(): void
     {
         if (!method_exists(get_called_class(), 'getEnum')) {
             throw new \BadMethodCallException('Classes using this trait must have static method getEnum().');
